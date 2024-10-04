@@ -1,0 +1,1 @@
+export { Accomodation } from "./entities/accomodation.entity";

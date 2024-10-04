@@ -1,0 +1,1 @@
+export { Tag } from "./entities/tag.entity";

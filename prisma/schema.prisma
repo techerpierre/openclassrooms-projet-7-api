@@ -31,6 +31,8 @@ model User {
   role UserRole @default(CLIENT)
   accomodations Accomodation[]
   ratings Rating[]
+  authorizationsId String
+  authorizations Authorizations @relation(fields: [authorizationsId], references: [id])
 }
 
 model Accomodation {
@@ -47,6 +49,18 @@ model Accomodation {
   tags String[]
 }
 
+model Authorizations {
+  id String @id @default(uuid())
+  listAccomodation Boolean @default(false)
+  createAccomodation Boolean @default(false)
+  deleteAccomodation Boolean @default(false)
+  findAccomodation Boolean @default(false)
+  searchAccomodation Boolean @default(false)
+  users User[]
+}
+
+// SECONDARY MODELS (ex: for autocompletion)
+
 model Rating {
   id String @id @default(uuid())
   value Int
@@ -55,8 +69,6 @@ model Rating {
   accomodationId String
   accomodation Accomodation @relation(fields: [accomodationId], references: [id])
 }
-
-// SECONDARY MODELS (ex: for autocompletion)
 
 model Tag {
   id String @id @default(uuid())
