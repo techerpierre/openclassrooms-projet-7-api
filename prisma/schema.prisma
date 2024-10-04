@@ -51,6 +51,7 @@ model Accomodation {
 
 model Authorizations {
   id String @id @default(uuid())
+  for UserRole
   listAccomodation Boolean @default(false)
   createAccomodation Boolean @default(false)
   deleteAccomodation Boolean @default(false)

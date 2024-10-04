@@ -3,6 +3,7 @@ import { User } from "../../user/user.module";
 export class Authorization {
     
     id: string;
+    for: string;
     listAccomodation: boolean;
     createAccomodation: boolean;
     deleteAccomodation: boolean;
@@ -13,6 +14,7 @@ export class Authorization {
     constructor(d: any) {
 
         this.id = d.id;
+        this.for = d.for;
         this.listAccomodation = d.listAccomodation;
         this.createAccomodation = d.createAccomodation;
         this.deleteAccomodation = d.deleteAccomodation;
