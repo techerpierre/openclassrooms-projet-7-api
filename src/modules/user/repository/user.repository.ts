@@ -50,7 +50,7 @@ export class UserRepository {
 
     }
 
-    async finByEmail(email: string): Promise<User> {
+    async findByEmail(email: string): Promise<User> {
 
         const user = await this.prisma.user.findFirst({
             where: { email },
