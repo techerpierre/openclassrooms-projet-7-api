@@ -8,6 +8,7 @@ export class AccomodationController {
     
     constructor(private readonly accomodationService: AccomodationService) {
         this.router = Router();
+        this.registerRoutes();
     }
 
     registerRoutes() {
