@@ -3,7 +3,9 @@ import { HTTPException } from "../common/exceptions/http.exception";
 import { stdout } from "../common/helpers/log.helper";
 
 export function ExceptionMiddleware(err: any, req: Request, res: Response, next: NextFunction) {
+
     if (err) {
+        
         if (err instanceof HTTPException) {
             res.status(err.status).json({ error: err.message });
         } else {
@@ -13,4 +15,5 @@ export function ExceptionMiddleware(err: any, req: Request, res: Response, next:
     } else {
         next();
     }
+
 }

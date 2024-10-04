@@ -2,12 +2,19 @@ import Express from "express";
 import { stdout } from "./common/helpers/log.helper";
 import { config } from "dotenv";
 import { ExceptionMiddleware } from "./middlewares/exception.middleware";
+import { AccomodationModule } from "./modules/accomodation/accomodation.module";
+import { PrismaClient } from "@prisma/client";
+import "express-async-errors";
 
 function main() {
     config();
     const app = Express();
     app.use(Express.json());
 
+    const prisma = new PrismaClient();
+    const accomodationModule = new AccomodationModule(prisma);
+
+    app.use("/accomodations", accomodationModule.getRouter());
     app.use(ExceptionMiddleware as any);
 
     const port = process.env.PORT ? Number(process.env.PORT) : 8080;
