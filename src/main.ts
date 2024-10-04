@@ -5,6 +5,7 @@ import { ExceptionMiddleware } from "./middlewares/exception.middleware";
 import { AccomodationModule } from "./modules/accomodation/accomodation.module";
 import { PrismaClient } from "@prisma/client";
 import "express-async-errors";
+import { UserModule } from "./modules/user/user.module";
 
 function main() {
     config();
@@ -13,8 +14,10 @@ function main() {
 
     const prisma = new PrismaClient();
     const accomodationModule = new AccomodationModule(prisma);
+    const userModule = new UserModule(prisma);
 
     app.use("/accomodations", accomodationModule.getRouter());
+    app.use("/users", userModule.getRouter());
     app.use(ExceptionMiddleware as any);
 
     const port = process.env.PORT ? Number(process.env.PORT) : 8080;

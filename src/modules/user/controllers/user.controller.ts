@@ -55,6 +55,7 @@ export class UserController {
         const user = await this.userService.findOne(req.params.id, includes);
 
         res.json({ data: user });
+        
     }
 
 }
