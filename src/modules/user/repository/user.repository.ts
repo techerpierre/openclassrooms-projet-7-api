@@ -32,6 +32,7 @@ export class UserRepository {
                 lastname: data.lastname,
                 picture: data.picture,
                 status: data.status as any,
+                authorizationsId: data.authorizationsId,
             },
         });
 

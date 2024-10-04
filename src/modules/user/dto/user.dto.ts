@@ -11,4 +11,5 @@ export interface UpdateUser {
     lastname: string;
     picture: string;
     status: string;
+    authorizationsId: string;
 }

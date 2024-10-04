@@ -3,6 +3,7 @@ import { PasswordService } from "../../password/password.module";
 import { UserService } from "../user.module";
 import { BadRequestException } from "../../../common/exceptions/http.exception";
 import { SafeConverter } from "../../../common/helpers/safe-converter";
+import { AuthorizationService } from "../../authorization/authorization.module";
 
 export class UserController {
 
@@ -11,6 +12,7 @@ export class UserController {
     constructor(
         private readonly userService: UserService,
         private readonly passwordService: PasswordService,
+        private readonly authorizationService: AuthorizationService,
     ) {
         this.router = Router();
         this.registerRoutes();
@@ -29,6 +31,13 @@ export class UserController {
             if (!this.passwordService.hasFormat(req.body.password))
                 throw new BadRequestException("Bad password format");
             req.body.password = this.passwordService.hash(req.body.password);
+        }
+
+        if (req.body.status && await this.authorizationService.findOne(req.body.status)) {
+            req.body.authorizationsId = req.body.status;
+        } else {
+            delete req.body.status;
+            delete req.body.authorizationsId;
         }
 
         if (await this.userService.findByEmail(req.body.email))
