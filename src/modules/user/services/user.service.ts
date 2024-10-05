@@ -16,11 +16,11 @@ export class UserService {
         return this.userRepository.update(id, data);
     }
 
-    async findOne(id: string, includes: string[]): Promise<User> {
+    async findOne(id: string, includes: string[]): Promise<User | null> {
         return this.userRepository.findOne(id, includes);
     }
 
-    async findByEmail(email: string): Promise<User> {
+    async findByEmail(email: string): Promise<User | null> {
         return this.userRepository.findByEmail(email);
     }
 

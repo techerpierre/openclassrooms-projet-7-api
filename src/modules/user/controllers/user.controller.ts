@@ -1,7 +1,7 @@
 import { Request, Response, Router } from "express";
 import { PasswordService } from "../../password/password.module";
 import { UserService } from "../user.module";
-import { BadRequestException } from "../../../common/exceptions/http.exception";
+import { BadRequestException, NotFoundException } from "../../../common/exceptions/http.exception";
 import { SafeConverter } from "../../../common/helpers/safe-converter";
 import { AuthorizationService } from "../../authorization/authorization.module";
 
@@ -55,6 +55,9 @@ export class UserController {
         const includes = SafeConverter.toStringArray(req.query.includes) ?? [];
 
         const user = await this.userService.findOne(req.params.id, includes);
+
+        if (!user)
+            throw new NotFoundException("This user is not found.");
 
         delete (user as any).password;
 

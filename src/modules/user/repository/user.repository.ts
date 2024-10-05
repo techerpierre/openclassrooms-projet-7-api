@@ -40,24 +40,24 @@ export class UserRepository {
 
     }
 
-    async findOne(id: string, includes: string[]): Promise<User> {
+    async findOne(id: string, includes: string[]): Promise<User | null> {
 
         const user = await this.prisma.user.findUnique({
             where: { id },
             include: Include.create(includes),
         });
 
-        return new User(user);
+        return user? new User(user) : null;
 
     }
 
-    async findByEmail(email: string): Promise<User> {
+    async findByEmail(email: string): Promise<User | null> {
 
         const user = await this.prisma.user.findFirst({
             where: { email },
         });
 
-        return new User(user);
+        return user? new User(user) : null;
 
     }
 

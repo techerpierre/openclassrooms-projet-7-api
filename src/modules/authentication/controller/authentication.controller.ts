@@ -23,6 +23,7 @@ export class AuthenticationController {
 
     registerRoutes() {
         this.router.post("/register", this.register.bind(this))
+        this.router.post("/authenticate", this.authenticate.bind(this))
     }
 
     async register(req: Request, res: Response) {
