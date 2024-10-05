@@ -41,10 +41,10 @@ export class AuthenticationController {
         if (await this.userService.findByEmail(email))
             throw new BadRequestException("This user is already exist.");
 
-        if (! await this.authorizationService.findOne("CLIENT"))
+        if (! await this.authorizationService.findOne("DEFAULT"))
             throw new Error("CLIENT authorization is not specified.");
 
-        const user = await this.userService.create({ email, password: hashedPassword, authorizationsId: "CLIENT" });
+        const user = await this.userService.create({ email, password: hashedPassword, authorizationsId: "DEFAULT" });
 
         res.json({ data: user });
 
