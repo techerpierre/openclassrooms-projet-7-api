@@ -7,7 +7,7 @@ import { AuthorizationService } from "../../authorization/authorization.module";
 
 export class AuthenticationController {
 
-    router: Router;
+    public router: Router;
 
     constructor(
         private readonly userService: UserService,
