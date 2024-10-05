@@ -29,7 +29,7 @@ export class UserController {
 
         if (req.body.password) {
             if (!this.passwordService.hasFormat(req.body.password))
-                throw new BadRequestException("Bad password format");
+                throw new BadRequestException("Bad password format.");
             req.body.password = this.passwordService.hash(req.body.password);
         }
 
@@ -41,9 +41,11 @@ export class UserController {
         }
 
         if (await this.userService.findByEmail(req.body.email))
-            throw new BadRequestException("This user is allready exist");
+            throw new BadRequestException("This user is allready exist.");
 
         const user = await this.userService.update(req.params.id, req.body);
+
+        delete (user as any).password;
 
         res.json({ data: user });
     }
@@ -54,8 +56,10 @@ export class UserController {
 
         const user = await this.userService.findOne(req.params.id, includes);
 
+        delete (user as any).password;
+
         res.json({ data: user });
-        
+
     }
 
 }
