@@ -13,7 +13,7 @@ export class FileController {
     }
 
     registerRoutes() {
-        this.router.get("/");
+        this.router.get("/", this.read.bind(this));
     }
 
     async read(req: Request, res: Response) {
