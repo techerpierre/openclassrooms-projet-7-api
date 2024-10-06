@@ -23,7 +23,7 @@ function main() {
     app.use("/accomodations", accomodationModule.getRouter());
     app.use("/users", userModule.getRouter());
     app.use("/auth", authenticationModule.getRouter());
-    app.use("/file", fileModule.getRouter());
+    app.use("/files", fileModule.getRouter());
     app.use(ExceptionMiddleware as any);
 
     const port = process.env.PORT ? Number(process.env.PORT) : 8080;

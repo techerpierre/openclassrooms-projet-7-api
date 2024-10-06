@@ -8,6 +8,8 @@ export class FileRepository {
 
         const completePath = Path.join(process.cwd(), process.env.FILE_UPLOAD_PATH || "/data", path);
 
+        fs.mkdirSync(completePath.split("/").pop() || "/", { recursive: true });
+
         fs.writeFile(completePath, buffer, (err) => {
             if (err) throw err;
         });
