@@ -40,7 +40,7 @@ export class UserController {
             delete req.body.authorizationsId;
         }
 
-        if (await this.userService.findByEmail(req.body.email))
+        if (req.body.email && await this.userService.findByEmail(req.body.email))
             throw new BadRequestException("This user is allready exist.");
 
         const user = await this.userService.update(req.params.id, req.body);
