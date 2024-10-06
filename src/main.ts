@@ -7,6 +7,7 @@ import { PrismaClient } from "@prisma/client";
 import "express-async-errors";
 import { UserModule } from "./modules/user/user.module";
 import { AuthenticationModule } from "./modules/authentication/authentication.module";
+import { FileModule } from "./modules/file/file.module";
 
 function main() {
     config();
@@ -17,10 +18,12 @@ function main() {
     const accomodationModule = new AccomodationModule(prisma);
     const userModule = new UserModule(prisma);
     const authenticationModule = new AuthenticationModule(prisma);
+    const fileModule = new FileModule();
 
     app.use("/accomodations", accomodationModule.getRouter());
     app.use("/users", userModule.getRouter());
     app.use("/auth", authenticationModule.getRouter());
+    app.use("/file", fileModule.getRouter());
     app.use(ExceptionMiddleware as any);
 
     const port = process.env.PORT ? Number(process.env.PORT) : 8080;
